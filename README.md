@@ -9,6 +9,7 @@ BAML lets you write bash scripts with a bunch of extra features provided by yq:
 * string utilities
 * ...and a bunch more
 
+## Installation
 While BAML depends on `yq` being installed in your environment, it requires
 no additional installation--just put a one line command at the top of
 your script:
