@@ -1,29 +1,62 @@
 # BAML
 
-**Bash + YAML for a better shell**
+**Bash + YAML for a better shell**, powered by [yq](https://github.com/mikefarah/yq/)
 
-Powered by yq
+BAML lets you write bash scripts with a bunch of extra features provided by yq:
+* native YAML/JSON support
+* structured variables (maps and arrays)
+* neater for loops
+* string utilities
+* ...and a bunch more
+
+While BAML depends on `yq` being installed in your environment, it requires
+no additional installation--just put a one line command at the top of
+your script:
+```bash
+echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaAoKZnVuY3Rpb24gYmFtbCgpIHsKICBlY2hvICJcJHsxfSIgfCB5cSBldmFsICJcJHsyfSIgLQp9CgpmdW5jdGlvbiBiYW1sQXJyKCkgewogIGxvY2FsIC1uIHJlc3VsdD1cJDEKICByZXN1bHQ9XCQoYmFtbCAiXCR7Mn0iICJcJHszfVtdIikKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoW159XSpcKVxzKn0vJChiYW1sICIke1wxfSIgJyInXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoW159XSpcKVxzKn1cKC4qXCkkLyQoYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIicpXG5cMSR7X3RtcFtAXX1cNC9nJyBcCg==" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash ; exit $? #no_baml
+```
 
 ## Basic Example
-```
-curl https://raw.githubusercontent.com/.../install.sh | bash
-baml << EOF
+```bash
+#! /bin/bash
+echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaAoKZnVuY3Rpb24gYmFtbCgpIHsKICBlY2hvICJcJHsxfSIgfCB5cSBldmFsICJcJHsyfSIgLQp9CgpmdW5jdGlvbiBiYW1sQXJyKCkgewogIGxvY2FsIC1uIHJlc3VsdD1cJDEKICByZXN1bHQ9XCQoYmFtbCAiXCR7Mn0iICJcJHszfVtdIikKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoW159XSpcKVxzKn0vJChiYW1sICIke1wxfSIgJyInXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoW159XSpcKVxzKn1cKC4qXCkkLyQoYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIicpXG5cMSR7X3RtcFtAXX1cNC9nJyBcCg==" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash ; exit $? #no_baml
 
 person="
 name: Jane Austen
 age: 23
 pets:
-- name: Rover
-- name: Goldie
+- Rover
+- Goldie
 "
 
-echo %person.name
+echo -e "${person}"
 
-for pet in @person.pets; do
-  echo %{ pet.name | upcase }
+echo %{person.name} is %{person.age} years old
+
+echo %{person.pets[0]}
+
+echo %{person.name | upcase}
+
+firstName=%{ person.name | split(" ") | .[0] }
+
+echo "first name: $firstName"
+
+if [[ %{person.age} -gt 23 ]]; then
+  echo %{person.name} can drink!
+fi
+if [[ %{person.pets[0]} == "Rover" ]]; then
+  echo "it's rover!"
+fi
+
+if [[ %{person.pets | length} -gt 1 ]]; then
+  echo "more than one pet!"
+  exit 1
+fi
+
+for pet in @{person.pets}; do
+  echo "Pet: $pet"
 done
 
-EOF
 ```
 
 ## How it Works
@@ -32,83 +65,3 @@ BAML transpiles your BAML script into a bash script, which can run anywhere (Bas
 BAML relies on `yq` being installed. The installer will add it if it's not available.
 
 
--------
-
-# OLD STUFF
-
--------
-
-## Examples
-Hello world:
-```bash
-baml -c << EOF
-echo "Hello world!"
-EOF
-# Hello world!
-```
-
-Further examples will omit the `baml -c <<< EOF`
-
-YAML file as input:
-```bash
-cat << EOF >> person.yaml
-name: Jane
-age: 23
-pets:
-- name: rover
-  age: 10
-- name: goldie
-  age: 1
-EOF
-
-load person.yaml       # Puts this file as the input to all yq commands
-echo "Hello %(.name)!" # Anything in %() is a yq command
-echo "You have %(.pets | length) pets"
-```
-
-load from cURL:
-```bash
-curl https://api.github.com/ | load
-echo %(.current_user_url)
-```
-
-loops:
-```bash
-load person.yaml
-echo "Hello %(.name)!"
-for pet in %(.pets[]); do
-  echo "  and hello to your pet %(.pet.name) too!"
-  if [[ %(.pet.age) -lt 2 ]]; then
-    echo "  (who is pretty young!)"
-  fi
-done
-for pet in %(.pets[] | select(.age < 2)); do
-  echo "%(.pet.name) is only %(.pet.age) years old!"
-done
-```
-
-math:
-```bash
-load person.yaml
-minutesPerYear=$(( 365 * 24 * 60 )) # Roughly!
-ageInMinutes=$(( %(.age) * minutesPerYear ))
-```
-
-structured variables:
-```bash
-jack=%{
-name: Jack
-age: 24
-}
-jill=%{
-name: Jill
-age: 25
-}
-people=%{
-- %(jack)
-- %(jill)
-}
-for person in %(.people[]); do
-  echo "hello %(.person.name)!"
-done
-```
