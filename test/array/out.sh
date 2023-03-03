@@ -24,3 +24,23 @@ bamlArr _tmp "${list}" '.pets'
 for pet in "${_tmp[@]}"; do
   echo $(baml "${pet}" '.name')
 done
+
+list="
+- name: Goldie
+- name: Rover
+"
+
+bamlArr _tmp "${list}" '.'
+for pet in "${_tmp[@]}"; do
+  echo $(baml "${pet}" '.name')
+done
+
+list="
+- Goldie
+- Rover
+"
+
+bamlArr _tmp "${list}" '.'
+for pet in "${_tmp[@]}"; do
+  echo $(baml "${pet}" '. ')
+done
