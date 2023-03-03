@@ -1,11 +1,9 @@
 {(
 cat <<EOF
 #! /bin/bash
-
 function baml() {
   echo "\${1}" | yq e "\${2}" -
 }
-
 function bamlArr() {
   local -n result=\$1
   result=()
