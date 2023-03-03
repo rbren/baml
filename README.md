@@ -1,6 +1,6 @@
 # BAML
 
-**Bash + YAML for a better shell**, powered by [yq](https://github.com/mikefarah/yq/)
+**Bash + YAML for a better shell**, powered by the magical [yq](https://github.com/mikefarah/yq/)
 
 BAML lets you write native `bash` scripts with a bunch of extra features provided by `yq`:
 * native YAML/JSON support
@@ -17,8 +17,9 @@ While BAML depends on `yq` being installed in your environment, it requires
 no additional installation--just put a one line command at the top of
 your script:
 ```bash
-echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaApmdW5jdGlvbiBiYW1sKCkgewogIGVjaG8gIlwkezF9IiB8IHlxIGUgIlwkezJ9IiAtCn0KZnVuY3Rpb24gYmFtbEFycigpIHsKICBsb2NhbCAtbiByZXN1bHQ9XCQxCiAgcmVzdWx0PSgpCiAgaXRlbXM9XCQoZWNobyAiXCR7Mn0iIHwgeXEgZSAtbz1qIC1JPTAgIlwkezN9W10iIC0pCiAgd2hpbGUgSUZTPSByZWFkIC1yIGl0ZW07IGRvCiAgICBpZiBbWyBcJHsjaXRlbX0gLWVxIDAgXV07IHRoZW4KICAgICAgY29udGludWUKICAgIGZpCiAgICByZXN1bHQrPSgiXCQoZWNobyAiXCR7aXRlbX0iIHwgeXEgZSAtcCBqc29uIC1vIHlhbWwgJy4nIC0pIikKICBkb25lIDw8PCAiXCRpdGVtcyIKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoXC5bXn1dKlwpXHMqfS8kKGJhbWwgIiR7XDF9IiAnIidcMiciJykvZycgXAogIHwgc2VkIC1lICdzLyV7XHMqXChbWzphbG51bTpdXVwrXClcKFtefV0qXClccyp9LyQoYmFtbCAiJHtcMX0iICciJy4gXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoXC5bXn1dKlwpXHMqfVwoLipcKSQvYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIidcblwxIiR7X3RtcFtAXX0iXDQvZycgXAogIHwgc2VkIC1lICdzL15cKC4qXClAe1xzKlwoW1s6YWxudW06XV1cK1wpXHMqXChbXn1dKlwpXHMqfVwoLipcKSQvYmFtbEFyciBfdG1wICIke1wyfSIgJyInLlwzJyInXG5cMSIke190bXBbQF19Ilw0L2cnCg==" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash -s $@ ; exit $? #no_baml
+echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaApmdW5jdGlvbiBiYW1sKCkgewogIGVjaG8gIlwkezF9IiB8IHlxIGUgIlwkezJ9IiAtCn0KZnVuY3Rpb24gYmFtbEFycigpIHsKICBsb2NhbCAtbiByZXN1bHQ9XCQxCiAgcmVzdWx0PSgpCiAgaXRlbXM9XCQoZWNobyAiXCR7Mn0iIHwgeXEgZSAtbz1qIC1JPTAgIlwkezN9IHwgLltdIiAtKQogIHdoaWxlIElGUz0gcmVhZCAtciBpdGVtOyBkbwogICAgaWYgW1sgXCR7I2l0ZW19IC1lcSAwIF1dOyB0aGVuCiAgICAgIGNvbnRpbnVlCiAgICBmaQogICAgcmVzdWx0Kz0oIlwkKGVjaG8gIlwke2l0ZW19IiB8IHlxIGUgLXAganNvbiAtbyB5YW1sICcuJyAtKSIpCiAgZG9uZSA8PDwgIlwkaXRlbXMiCn0KRU9GCikgOyBjYXQgJEJBTUxfRklMRTsgfSBcCiAgfCBncmVwIC12ICIjbm9fYmFtbCIgXAogIHwgc2VkIC1lICdzLyV7XHMqXChbWzphbG51bTpdXVwrXClcKFwuW159XSpcKVxzKn0vJChiYW1sICIke1wxfSIgJyInXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy8le1xzKlwoW1s6YWxudW06XV1cK1wpXChbXn1dKlwpXHMqfS8kKGJhbWwgIiR7XDF9IiAnIicuIFwyJyInKS9nJyBcCiAgfCBzZWQgLWUgJ3MvXlwoLipcKUB7XHMqXChbWzphbG51bTpdXVwrXClcKFwuW159XSpcKVxzKn1cKC4qXCkkL2JhbWxBcnIgX3RtcCAiJHtcMn0iICciJ1wzJyInXG5cMSIke190bXBbQF19Ilw0L2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVxzKlwoW159XSpcKVxzKn1cKC4qXCkkL2JhbWxBcnIgX3RtcCAiJHtcMn0iICciJy5cMyciJ1xuXDEiJHtfdG1wW0BdfSJcNC9nJwo=" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash -s $@ ; exit $? #no_baml
 ```
+See below for details on how this works.
 
 ## Basic Example
 Run `./example.sh` to try this example.
@@ -87,6 +88,10 @@ if [[ %{person.pets | length} -gt 1 ]]; then
   exit 1
 fi
 ```
+
+## Advanced Usage
+See the list of [yq operators](https://mikefarah.gitbook.io/yq/operators) for more possibilities.
+Not everything has been tested (see `./test` to check out what's covered so far).
 
 ## How it Works
 BAML transpiles your BAML script into a bash script, which can run anywhere (Bash 4.3 and up).
