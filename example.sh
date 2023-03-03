@@ -18,6 +18,12 @@ for pet in @{person.pets}; do
   echo "Pet: %{pet.name}"
 done
 
+# Load JSON/YAML from an API
+repositories=$(curl -s "https://api.github.com/orgs/fairwindsops/repos")
+for repo in @{repositories}; do
+  echo %{repo.full_name} has %{repo.stargazers_count} stargazers
+done
+
 # String manipulation is easy with yq
 echo %{person.name | upcase}
 firstName=%{ person.name | split(" ") | .[0] }

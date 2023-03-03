@@ -2,7 +2,7 @@
 
 **Bash + YAML for a better shell**, powered by [yq](https://github.com/mikefarah/yq/)
 
-BAML lets you write `bash` scripts with a bunch of extra features provided by `yq`:
+BAML lets you write native `bash` scripts with a bunch of extra features provided by `yq`:
 * native YAML/JSON support
 * structured variables (maps and arrays)
 * neater for loops
@@ -37,6 +37,12 @@ echo %{person.pets[0]}
 # Pretty for loops
 for pet in @{person.pets}; do
   echo "Pet: %{pet.name}"
+done
+
+# Load JSON/YAML from an API
+repositories=$(curl -s "https://api.github.com/orgs/fairwindsops/repos")
+for repo in @{repositories}; do
+  echo %{repo.full_name} has %{repo.stargazers_count} stargazers
 done
 
 # String manipulation is easy with yq
