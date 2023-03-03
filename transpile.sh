@@ -11,7 +11,7 @@ function bamlArr() {
   result=()
   items=\$(echo "\${2}" | yq e -o=j -I=0 "\${3}[]" -)
   while IFS=\= read item; do
-    result+=(\$(echo "\${item}" | yq e -p json -o yaml '.' -))
+    result+=("\$(echo "\${item}" | yq e -p json -o yaml '.' -)")
   done <<EOL
   \$items
 EOL
@@ -21,5 +21,5 @@ EOF
   | grep -v "#no_baml" \
   | sed -e 's/%{\s*\([[:alnum:]]\+\)\(\.[^}]*\)\s*}/$(baml "${\1}" '"'\2'"')/g' \
   | sed -e 's/%{\s*\([[:alnum:]]\+\)\([^}]*\)\s*}/$(baml "${\1}" '"'. \2'"')/g' \
-  | sed -e 's/^\(.*\)@{\s*\([[:alnum:]]\+\)\(\.[^}]*\)\s*}\(.*\)$/bamlArr _tmp "${\2}" '"'\3'"'\n\1${_tmp[@]}\4/g' \
-  | sed -e 's/^\(.*\)@{\s*\([[:alnum:]]\+\)\s*\([^}]*\)\s*}\(.*\)$/bamlArr _tmp "${\2}" '"'.\3'"'\n\1${_tmp[@]}\4/g'
+  | sed -e 's/^\(.*\)@{\s*\([[:alnum:]]\+\)\(\.[^}]*\)\s*}\(.*\)$/bamlArr _tmp "${\2}" '"'\3'"'\n\1"${_tmp[@]}"\4/g' \
+  | sed -e 's/^\(.*\)@{\s*\([[:alnum:]]\+\)\s*\([^}]*\)\s*}\(.*\)$/bamlArr _tmp "${\2}" '"'.\3'"'\n\1"${_tmp[@]}"\4/g'

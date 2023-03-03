@@ -1,9 +1,9 @@
 list="
 pets:
-- Goldie
-- Rover
+- name: Goldie
+- name: Rover
 "
 
 for pet in @{list.pets}; do
-  echo %{pet}
+  echo %{pet.name}
 done

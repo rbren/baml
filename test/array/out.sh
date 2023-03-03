@@ -9,18 +9,18 @@ function bamlArr() {
   result=()
   items=$(echo "${2}" | yq e -o=j -I=0 "${3}[]" -)
   while IFS=\= read item; do
-    result+=($(echo "${item}" | yq e -p json -o yaml '.' -))
+    result+=("$(echo "${item}" | yq e -p json -o yaml '.' -)")
   done <<EOL
   $items
 EOL
 }
 list="
 pets:
-- Goldie
-- Rover
+- name: Goldie
+- name: Rover
 "
 
 bamlArr _tmp "${list}" '.pets'
-for pet in ${_tmp[@]}; do
-  echo $(baml "${pet}" '. ')
+for pet in "${_tmp[@]}"; do
+  echo $(baml "${pet}" '.name')
 done

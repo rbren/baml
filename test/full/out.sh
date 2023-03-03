@@ -9,7 +9,7 @@ function bamlArr() {
   result=()
   items=$(echo "${2}" | yq e -o=j -I=0 "${3}[]" -)
   while IFS=\= read item; do
-    result+=($(echo "${item}" | yq e -p json -o yaml '.' -))
+    result+=("$(echo "${item}" | yq e -p json -o yaml '.' -)")
   done <<EOL
   $items
 EOL
@@ -54,7 +54,7 @@ pets:
   fi
 
 bamlArr _tmp "${person}" '.pets'
-  for pet in ${_tmp[@]}; do
+  for pet in "${_tmp[@]}"; do
 # bamlArr pets "${person}" ".pets"
 # for pet in ${pets[@]}; do
   echo "Pet: $pet"
