@@ -5,7 +5,7 @@ function baml() {
 function bamlArr() {
   local -n result=$1
   result=()
-  items=$(echo "${2}" | yq e -o=j -I=0 "${3}[]" -)
+  items=$(echo "${2}" | yq e -o=j -I=0 "${3} | .[]" -)
   while IFS= read -r item; do
     if [[ ${#item} -eq 0 ]]; then
       continue

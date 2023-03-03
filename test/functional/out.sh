@@ -13,9 +13,15 @@ function bamlArr() {
     result+=("$(echo "${item}" | yq e -p json -o yaml '.' -)")
   done <<< "$items"
 }
-person="
-name: Jane
-age: 23
+arr="
+- 1
+- 2
+- 3
 "
 
-echo $(baml "${person}" '.name') is $(baml "${person}" '.age') years old
+arrPlusOne=$(baml "${arr}" '.  | map(. + 1)')
+echo ${arrPlusOne[@]}
+bamlArr _tmp "${arr}" '.| map(. + 1)'
+for num in "${_tmp[@]}"; do
+  echo $(baml "${num}" '. ')
+done
