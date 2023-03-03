@@ -25,3 +25,12 @@ bamlArr _tmp "${arr}" '.| map(. + 1)'
 for num in "${_tmp[@]}"; do
   echo $(baml "${num}" '. ')
 done
+
+# FIXME: is this a yq issue? select doesn't output YAML
+# https://github.com/mikefarah/yq/issues/1586
+big=$(baml "${arr}" '.[] | select(. > 1) | .[] ')
+echo ${big[@]}
+bamlArr _tmp "${big}" '.[] | select(. > 1) | .[] '
+for num in "${_tmp[@]}"; do
+  echo $(baml "${num}" '. ')
+done

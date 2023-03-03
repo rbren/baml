@@ -25,7 +25,7 @@ Run `./example.sh` to try this example.
 
 ```bash
 #! /bin/bash
-echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaApmdW5jdGlvbiBiYW1sKCkgewogIGVjaG8gIlwkezF9IiB8IHlxIGUgIlwkezJ9IiAtCn0KZnVuY3Rpb24gYmFtbEFycigpIHsKICBsb2NhbCAtbiByZXN1bHQ9XCQxCiAgcmVzdWx0PSgpCiAgaXRlbXM9XCQoZWNobyAiXCR7Mn0iIHwgeXEgZSAtbz1qIC1JPTAgIlwkezN9W10iIC0pCiAgd2hpbGUgSUZTPSByZWFkIC1yIGl0ZW07IGRvCiAgICBpZiBbWyBcJHsjaXRlbX0gLWVxIDAgXV07IHRoZW4KICAgICAgY29udGludWUKICAgIGZpCiAgICByZXN1bHQrPSgiXCQoZWNobyAiXCR7aXRlbX0iIHwgeXEgZSAtcCBqc29uIC1vIHlhbWwgJy4nIC0pIikKICBkb25lIDw8PCAiXCRpdGVtcyIKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoXC5bXn1dKlwpXHMqfS8kKGJhbWwgIiR7XDF9IiAnIidcMiciJykvZycgXAogIHwgc2VkIC1lICdzLyV7XHMqXChbWzphbG51bTpdXVwrXClcKFtefV0qXClccyp9LyQoYmFtbCAiJHtcMX0iICciJy4gXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoXC5bXn1dKlwpXHMqfVwoLipcKSQvYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIidcblwxIiR7X3RtcFtAXX0iXDQvZycgXAogIHwgc2VkIC1lICdzL15cKC4qXClAe1xzKlwoW1s6YWxudW06XV1cK1wpXHMqXChbXn1dKlwpXHMqfVwoLipcKSQvYmFtbEFyciBfdG1wICIke1wyfSIgJyInLlwzJyInXG5cMSIke190bXBbQF19Ilw0L2cnCg==" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash -s $@ ; exit $? #no_baml
+echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaApmdW5jdGlvbiBiYW1sKCkgewogIGVjaG8gIlwkezF9IiB8IHlxIGUgIlwkezJ9IiAtCn0KZnVuY3Rpb24gYmFtbEFycigpIHsKICBsb2NhbCAtbiByZXN1bHQ9XCQxCiAgcmVzdWx0PSgpCiAgaXRlbXM9XCQoZWNobyAiXCR7Mn0iIHwgeXEgZSAtbz1qIC1JPTAgIlwkezN9IHwgLltdIiAtKQogIHdoaWxlIElGUz0gcmVhZCAtciBpdGVtOyBkbwogICAgaWYgW1sgXCR7I2l0ZW19IC1lcSAwIF1dOyB0aGVuCiAgICAgIGNvbnRpbnVlCiAgICBmaQogICAgcmVzdWx0Kz0oIlwkKGVjaG8gIlwke2l0ZW19IiB8IHlxIGUgLXAganNvbiAtbyB5YW1sICcuJyAtKSIpCiAgZG9uZSA8PDwgIlwkaXRlbXMiCn0KRU9GCikgOyBjYXQgJEJBTUxfRklMRTsgfSBcCiAgfCBncmVwIC12ICIjbm9fYmFtbCIgXAogIHwgc2VkIC1lICdzLyV7XHMqXChbWzphbG51bTpdXVwrXClcKFwuW159XSpcKVxzKn0vJChiYW1sICIke1wxfSIgJyInXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy8le1xzKlwoW1s6YWxudW06XV1cK1wpXChbXn1dKlwpXHMqfS8kKGJhbWwgIiR7XDF9IiAnIicuIFwyJyInKS9nJyBcCiAgfCBzZWQgLWUgJ3MvXlwoLipcKUB7XHMqXChbWzphbG51bTpdXVwrXClcKFwuW159XSpcKVxzKn1cKC4qXCkkL2JhbWxBcnIgX3RtcCAiJHtcMn0iICciJ1wzJyInXG5cMSIke190bXBbQF19Ilw0L2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVxzKlwoW159XSpcKVxzKn1cKC4qXCkkL2JhbWxBcnIgX3RtcCAiJHtcMn0iICciJy5cMyciJ1xuXDEiJHtfdG1wW0BdfSJcNC9nJwo=" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash -s $@ ; exit $? #no_baml
 
 # Store JSON or YAML as a bash string
 person="
@@ -33,16 +33,23 @@ name: Jane Austen
 age: 23
 pets:
 - name: Rover
+  age: 12
 - name: Goldie
+  age: 3
 "
 
 # Access deeply nested fields. Anything in %{} is a yq query
 echo %{person.name} is %{person.age} years old
-echo %{person.pets[0]}
+echo %{person.pets[0].name}
 
 # Easy for loops using @{} to wrap arrays
 for pet in @{person.pets}; do
   echo "Pet: %{pet.name}"
+done
+
+# Also array mapping. Feature request for filters: https://github.com/mikefarah/yq/issues/1586
+for praise in @{person.pets | map("Good dog, " + .name)}; do
+  echo %{praise}
 done
 
 # String manipulation is easy with yq
@@ -93,5 +100,6 @@ BAML relies on `yq` being installed, and uses it under the hood.
 
 ## TODO
 * Support literals, like `%{"hello" | upcase}` or `%{22 * 2 + 1}`
+* Nested interpolation, like `%{person[%{key}]}`
 * GitHub action to run tests
 * Any potential performance gains (it can be a little slow)
