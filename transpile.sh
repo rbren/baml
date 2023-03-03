@@ -9,6 +9,9 @@ function bamlArr() {
   result=()
   items=\$(echo "\${2}" | yq e -o=j -I=0 "\${3}[]" -)
   while IFS= read -r item; do
+    if [[ \${#item} -eq 0 ]]; then
+      continue
+    fi
     result+=("\$(echo "\${item}" | yq e -p json -o yaml '.' -)")
   done <<< "\$items"
 }
