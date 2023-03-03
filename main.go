@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"github.com/alecthomas/kong"
+
+	"rbren.io/yaml-programming/pkg/run"
 )
 
 type Context struct {
@@ -13,9 +14,8 @@ type RunCmd struct {
 	Path string `arg:"" name:"path" help:"YAML file to run." type:"path"`
 }
 
-func (run *RunCmd) Run(ctx *Context) error {
-	fmt.Println("run!")
-	return nil
+func (r *RunCmd) Run(ctx *Context) error {
+	return run.Run(r.Path)
 }
 
 type CLI struct {
