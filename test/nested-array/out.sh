@@ -25,7 +25,6 @@ echo $(baml "${list}" '.pets[0].nicknames[0]')
 
 bamlArr _tmp "${list}" '.pets'
 for pet in "${_tmp[@]}"; do
-  # FIXME: Rover gets a nickname printed too...
 bamlArr _tmp "${pet}" '.nicknames'
   for nickname in "${_tmp[@]}"; do
     echo $(baml "${pet}" '.name') has nickname $(baml "${nickname}" '. ')

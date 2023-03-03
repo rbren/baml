@@ -9,7 +9,6 @@ pets:
 echo %{list.pets[0].nicknames[0]}
 
 for pet in @{list.pets}; do
-  # FIXME: Rover gets a nickname printed too...
   for nickname in @{pet.nicknames}; do
     echo %{pet.name} has nickname %{nickname}
   done

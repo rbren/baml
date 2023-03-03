@@ -19,16 +19,19 @@ for pet in @{person.pets}; do
   echo "Pet: %{pet.name}"
 done
 
+# String manipulation is easy with yq
+echo %{person.name | upcase}
+firstName=%{ person.name | split(" ") | .[0] }
+echo "first name: %{firstName}"
+
+# Also math
+echo %{person.name} is %{person.age * 365} days old
+
 # Load JSON/YAML from an API
 repositories=$(curl -s "https://api.github.com/orgs/fairwindsops/repos")
 for repo in @{repositories}; do
   echo %{repo.full_name} has %{repo.stargazers_count} stargazers
 done
-
-# String manipulation is easy with yq
-echo %{person.name | upcase}
-firstName=%{ person.name | split(" ") | .[0] }
-echo "first name: %{firstName}"
 
 # Everything works nicely with if statements
 if [[ %{person.age} -gt 21 ]]; then
@@ -50,4 +53,3 @@ if [[ %{person.pets | length} -gt 1 ]]; then
   # Exit codes work as expected
   exit 1
 fi
-

@@ -45,16 +45,19 @@ for pet in @{person.pets}; do
   echo "Pet: %{pet.name}"
 done
 
+# String manipulation is easy with yq
+echo %{person.name | upcase}
+firstName=%{ person.name | split(" ") | .[0] }
+echo "first name: %{firstName}"
+
+# Also math
+echo %{person.name} is %{person.age * 365} days old
+
 # Load JSON/YAML from an API
 repositories=$(curl -s "https://api.github.com/orgs/fairwindsops/repos")
 for repo in @{repositories}; do
   echo %{repo.full_name} has %{repo.stargazers_count} stargazers
 done
-
-# String manipulation is easy with yq
-echo %{person.name | upcase}
-firstName=%{ person.name | split(" ") | .[0] }
-echo "first name: %{firstName}"
 
 # Everything works nicely with if statements
 if [[ %{person.age} -gt 21 ]]; then
@@ -87,3 +90,8 @@ The one-liner has the transpiler (from `./transpile.sh`) encoded as base64. It:
 * takes the transpiler stdout (which is now bash) and pipes that to `/bin/bash`, along with script arguments
 
 BAML relies on `yq` being installed, and uses it under the hood.
+
+## TODO
+* Support literals, like `%{"hello" | upcase}` or `%{22 * 2 + 1}`
+* GitHub action to run tests
+* Any potential performance gains (it can be a little slow)
