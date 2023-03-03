@@ -57,7 +57,7 @@ echo "You ran this script with argument $1"
 echo "Your timezone is $TZ"
 
 # You can also muck with arguments/env in the same way
-echo "Your city is %{ TZ | split("/") | .[1] }"
+echo "Your city is %{ TZ | split("/") | .[1] | sub("_", " ") }"
 
 if [[ %{person.pets | length} -gt 1 ]]; then
   echo "more than one pet!"
@@ -65,9 +65,6 @@ if [[ %{person.pets | length} -gt 1 ]]; then
   exit 1
 fi
 ```
-
-## Features
-* 
 
 ## How it Works
 BAML transpiles your BAML script into a bash script, which can run anywhere (Bash 4.3 and up).
