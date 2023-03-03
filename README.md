@@ -2,11 +2,12 @@
 
 **Bash + YAML for a better shell**, powered by the magical [yq](https://github.com/mikefarah/yq/)
 
-BAML lets you write native `bash` scripts with a bunch of extra features provided by `yq`:
+BAML lets you write native `bash` scripts with a bunch of extra features powered by `yq`:
 * native YAML/JSON support
-* structured variables (maps and arrays)
-* neater for loops
+* structured, nested variables (maps and arrays)
+* neater `for` loops and `if` statements
 * string utilities
+* math
 * ...and a bunch more
 
 ## Installation
