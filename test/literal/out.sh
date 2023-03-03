@@ -14,17 +14,4 @@ function bamlArr() {
   $items
 EOL
 }
-name="Jane"
-echo "your name is $(baml "${name}" '. ')"
-echo "your name in uppercase is $(baml "${name}" '.  | upcase')"
-
-pets="
-- Goldie
-- Rover
-"
-
-bamlArr _tmp "${pets}" '.'
-for pet in ${_tmp[@]}; do
-  echo $pet
-done
-
+echo %{"name" | upcase}
