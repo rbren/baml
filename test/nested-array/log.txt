@@ -1,0 +1,7 @@
+Gogo
+Goldie has nickname Gogo
+Rover has nickname
+foo
+bar
+quux
+baz

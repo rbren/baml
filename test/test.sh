@@ -7,6 +7,8 @@ for dir in ./test/*; do
   fi
   echo $dir
   BAML_FILE=$dir/baml.sh ./transpile.sh > $dir/out.sh
+  chmod +x $dir/out.sh
+  $dir/out.sh > $dir/log.txt
   if ! git diff --quiet --exit-code $dir; then
     echo "test $dir changed"
     some_changed=1

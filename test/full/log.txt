@@ -1,0 +1,15 @@
+
+name: Jane Austen
+age: 23
+pets:
+- Rover
+- Goldie
+
+Jane Austen
+Rover
+JANE AUSTEN
+first name: Jane
+it's rover!
+more than one pet!
+Pet: Rover
+Pet: Goldie
