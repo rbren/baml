@@ -1,5 +1,5 @@
 #! /bin/bash
-echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaAoKZnVuY3Rpb24gYmFtbCgpIHsKICBlY2hvICJcJHsxfSIgfCB5cSBldmFsICJcJHsyfSIgLQp9CgpmdW5jdGlvbiBiYW1sQXJyKCkgewogIGxvY2FsIC1uIHJlc3VsdD1cJDEKICByZXN1bHQ9XCQoYmFtbCAiXCR7Mn0iICJcJHszfVtdIikKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoLipcKVxzKn0vJChiYW1sICIke1wxfSIgJyInXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoLipcKVxzKn1cKC4qXCkkLyQoYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIicpXG5cMSR7X3RtcFtAXX1cNC9nJyBcCiAgfCAvYmluL2Jhc2gK" | base64 -d | BAML_FILE=$0 /bin/bash && exit 0 #no_baml
+echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaAoKZnVuY3Rpb24gYmFtbCgpIHsKICBlY2hvICJcJHsxfSIgfCB5cSBldmFsICJcJHsyfSIgLQp9CgpmdW5jdGlvbiBiYW1sQXJyKCkgewogIGxvY2FsIC1uIHJlc3VsdD1cJDEKICByZXN1bHQ9XCQoYmFtbCAiXCR7Mn0iICJcJHszfVtdIikKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoLipcKVxzKn0vJChiYW1sICIke1wxfSIgJyInXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoLipcKVxzKn1cKC4qXCkkLyQoYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIicpXG5cMSR7X3RtcFtAXX1cNC9nJyBcCiAgfCAvYmluL2Jhc2gK" | base64 -d | BAML_FILE=$0 /bin/bash ; exit $? #no_baml
 
 person="
 name: Jane Austen
@@ -30,6 +30,7 @@ fi
 
 if [[ %{person.pets | length} -gt 1 ]]; then
   echo "more than one pet!"
+  exit 1
 fi
 
 for pet in @{person.pets}; do
