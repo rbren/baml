@@ -1,0 +1,22 @@
+#! /usr/bin/yamlr
+import:
+  bash: bash
+  yearsToMinutes: ./years-to-minutes.yaml
+inputs:
+  - name:
+      type: string
+      default: "borg"
+  - age:
+      type: integer
+      description: the age of the person
+      default: 12
+run:
+  - bash:
+      cmd: |
+        echo $name, youre $age years old
+  - yearsToMinutes:
+      $years: age
+      $$: ageInMinutes
+  - bash:
+      cmd: |
+        echo thats $ageInMinutes minutes!
