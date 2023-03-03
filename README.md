@@ -26,35 +26,35 @@ person="
 name: Jane Austen
 age: 23
 pets:
-- Rover
-- Goldie
+- name: Rover
+- name: Goldie
 "
 
+# Easily access deeply nested fields
 echo %{person.name} is %{person.age} years old
-
 echo %{person.pets[0]}
 
+# Pretty for loops
+for pet in @{person.pets}; do
+  echo "Pet: %{pet.name}"
+done
+
+# String manipulation is easy with yq
 echo %{person.name | upcase}
-
 firstName=%{ person.name | split(" ") | .[0] }
+echo "first name: %{firstName}"
 
-echo "first name: $firstName"
-
-if [[ %{person.age} -gt 23 ]]; then
+# Everything works nicely with if statements
+if [[ %{person.age} -gt 21 ]]; then
   echo %{person.name} can drink!
 fi
-if [[ %{person.pets[0]} == "Rover" ]]; then
+if [[ %{person.pets[0].name} == "Rover" ]]; then
   echo "it's rover!"
 fi
-
 if [[ %{person.pets | length} -gt 1 ]]; then
   echo "more than one pet!"
   exit 1
 fi
-
-for pet in @{person.pets}; do
-  echo "Pet: $pet"
-done
 
 ```
 
