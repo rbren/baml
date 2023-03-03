@@ -10,6 +10,9 @@ BAML lets you write native `bash` scripts with a bunch of extra features provide
 * ...and a bunch more
 
 ## Installation
+Be sure to have [yq](https://github.com/mikefarah/yq/) 4.x installed. 4.31.x is required for the
+example below.
+
 While BAML depends on `yq` being installed in your environment, it requires
 no additional installation--just put a one line command at the top of
 your script:
@@ -18,6 +21,8 @@ echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaApmdW5jdGlvbiBiYW1sKCkgewogIGVjaG8gIlwkez
 ```
 
 ## Basic Example
+Run `./example.sh` to try this example.
+
 ```bash
 #! /bin/bash
 echo "eygKY2F0IDw8RU9GCiMhIC9iaW4vYmFzaApmdW5jdGlvbiBiYW1sKCkgewogIGVjaG8gIlwkezF9IiB8IHlxIGUgIlwkezJ9IiAtCn0KZnVuY3Rpb24gYmFtbEFycigpIHsKICBsb2NhbCAtbiByZXN1bHQ9XCQxCiAgcmVzdWx0PSgpCiAgaXRlbXM9XCQoZWNobyAiXCR7Mn0iIHwgeXEgZSAtbz1qIC1JPTAgIlwkezN9W10iIC0pCiAgd2hpbGUgSUZTPSByZWFkIC1yIGl0ZW07IGRvCiAgICByZXN1bHQrPSgiXCQoZWNobyAiXCR7aXRlbX0iIHwgeXEgZSAtcCBqc29uIC1vIHlhbWwgJy4nIC0pIikKICBkb25lIDw8PCAiXCRpdGVtcyIKfQpFT0YKKSA7IGNhdCAkQkFNTF9GSUxFOyB9IFwKICB8IGdyZXAgLXYgIiNub19iYW1sIiBcCiAgfCBzZWQgLWUgJ3MvJXtccypcKFtbOmFsbnVtOl1dXCtcKVwoXC5bXn1dKlwpXHMqfS8kKGJhbWwgIiR7XDF9IiAnIidcMiciJykvZycgXAogIHwgc2VkIC1lICdzLyV7XHMqXChbWzphbG51bTpdXVwrXClcKFtefV0qXClccyp9LyQoYmFtbCAiJHtcMX0iICciJy4gXDInIicpL2cnIFwKICB8IHNlZCAtZSAncy9eXCguKlwpQHtccypcKFtbOmFsbnVtOl1dXCtcKVwoXC5bXn1dKlwpXHMqfVwoLipcKSQvYmFtbEFyciBfdG1wICIke1wyfSIgJyInXDMnIidcblwxIiR7X3RtcFtAXX0iXDQvZycgXAogIHwgc2VkIC1lICdzL15cKC4qXClAe1xzKlwoW1s6YWxudW06XV1cK1wpXHMqXChbXn1dKlwpXHMqfVwoLipcKSQvYmFtbEFyciBfdG1wICIke1wyfSIgJyInLlwzJyInXG5cMSIke190bXBbQF19Ilw0L2cnCg==" | base64 -d | BAML_FILE=$0 /bin/bash | /bin/bash -s $@ ; exit $? #no_baml
