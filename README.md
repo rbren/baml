@@ -30,8 +30,6 @@ pets:
 - Goldie
 "
 
-echo -e "${person}"
-
 echo %{person.name} is %{person.age} years old
 
 echo %{person.pets[0]}
