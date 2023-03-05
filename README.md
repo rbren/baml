@@ -97,12 +97,12 @@ Not everything has been tested (see `./test` to check out what's covered so far)
 ## How it Works
 BAML transpiles your BAML script into a bash script, which can run anywhere (Bash 4.3 and up).
 
-The one-liner has the transpiler (from `./transpile.sh`) encoded as base64. It:
-* decodes the transpiler
-* pipes the transpiler code to `/bin/bash`, passing in the current file as an env var `BAML_FILE`
-* takes the transpiler stdout (which is now bash) and pipes that to `/bin/bash`, along with script arguments
+The transpiler code is contained in `./transpile.sh`. The one-line install command encodes this file in base64.
 
-BAML relies on `yq` being installed, and uses it under the hood.
+The install command works in three steps:
+* It decodes the transpiler
+* It runs the transpiler by sending it to `/bin/bash`. It passes in the current file as an environment variable, `BAML_FILE`, which it reads from `$0`.
+* The output of the transpiler is a normal bash script--the transpiled version of your script. This gets passed to `/bin/bash`, along with any other arguments.
 
 ## TODO
 * Support literals, like `%{"hello" | upcase}` or `%{22 * 2 + 1}`
